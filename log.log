@@ -1,0 +1,16 @@
+
+19:15:09.735 [main] ERROR  - java.lang.IllegalArgumentException: No enum constant com.shatskiy.library.controller.command.CommandName.REMOVE_BOOK
+19:16:16.383 [main] ERROR  - fail in CommandProvider
+java.lang.IllegalArgumentException: No enum constant com.shatskiy.library.controller.command.CommandName.REMOVE_BOOK
+	at java.lang.Enum.valueOf(Enum.java:238) ~[?:1.8.0_144]
+	at com.shatskiy.library.controller.command.CommandName.valueOf(CommandName.java:1) ~[classes/:?]
+	at com.shatskiy.library.controller.command.CommandProvider.getCommand(CommandProvider.java:26) [classes/:?]
+	at com.shatskiy.library.controller.Controller.executeAction(Controller.java:25) [classes/:?]
+	at com.shatskiy.library.view.View.main(View.java:40) [classes/:?]
+19:31:39.866 [main] ERROR  - fail in CommandProvider
+java.lang.IllegalArgumentException: No enum constant com.shatskiy.library.controller.command.CommandName.REMOVE_BOOK
+	at java.lang.Enum.valueOf(Enum.java:238) ~[?:1.8.0_144]
+	at com.shatskiy.library.controller.command.CommandName.valueOf(CommandName.java:1) ~[classes/:?]
+	at com.shatskiy.library.controller.command.CommandProvider.getCommand(CommandProvider.java:26) [classes/:?]
+	at com.shatskiy.library.controller.Controller.executeAction(Controller.java:25) [classes/:?]
+	at com.shatskiy.library.view.View.main(View.java:40) [classes/:?]

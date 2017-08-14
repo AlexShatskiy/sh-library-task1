@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   					   
+	   					   
+    <bean id="сonnectionPool"
+          class="com.shatskiy.library.dao.connection.ConnectionPool">
+    </bean>
+
+
+
+    <bean id="bookDAOImpl"
+          class="com.shatskiy.library.dao.impl.BookDAOImpl">
+          <constructor-arg ref="сonnectionPool"></constructor-arg>
+    </bean>
+    
+	<bean id="userDAOImpl"
+          class="com.shatskiy.library.dao.impl.UserDAOImpl">
+          <constructor-arg ref="сonnectionPool"></constructor-arg>
+    </bean>
+   
+    
+    
+    <bean id="bookServiceImpl"
+          class="com.shatskiy.library.service.impl.BookServiceImpl">
+          <constructor-arg ref="bookDAOImpl"></constructor-arg>
+    </bean>
+     
+    <bean id="userServiceImpl"
+          class="com.shatskiy.library.service.impl.UserServiceImpl">
+          <constructor-arg ref="userDAOImpl"></constructor-arg>
+    </bean> 
+    
+    
+    <!--command-->
+    
+     <bean id="addEditBook"
+          class="com.shatskiy.library.controller.command.impl.AddEditBook">
+          <constructor-arg ref="bookServiceImpl"></constructor-arg>
+    </bean>
+     
+    <bean id="addNewBook"
+          class="com.shatskiy.library.controller.command.impl.AddNewBook">
+          <constructor-arg ref="bookServiceImpl"></constructor-arg>
+    </bean> 
+    
+     <bean id="getBookList"
+          class="com.shatskiy.library.controller.command.impl.GetBookList">
+          <constructor-arg ref="bookServiceImpl"></constructor-arg>
+    </bean>
+     
+    <bean id="signIn"
+          class="com.shatskiy.library.controller.command.impl.SignIn">
+          <constructor-arg ref="userServiceImpl"></constructor-arg>
+    </bean> 
+    
+    <bean id="signUp"
+          class="com.shatskiy.library.controller.command.impl.SignUp">
+          <constructor-arg ref="userServiceImpl"></constructor-arg>
+    </bean>
+     
+    <bean id="wrongRequest"
+          class="com.shatskiy.library.controller.command.impl.WrongRequest">
+    </bean>
+    
+    
+    
+	<bean id="map" class="java.util.HashMap">
+	    <constructor-arg>
+	        <map key-type="com.shatskiy.library.controller.command.CommandName" 
+	             value-type="com.shatskiy.library.controller.command.Command">
+	             
+	            <entry key="ADD_NEW_BOOK" value-ref="addNewBook" />
+	            <entry key="SIGN_IN" value-ref="signIn" />
+	            <entry key="SIGN_UP" value-ref="signUp" />
+	            <entry key="GET_BOOKLIST" value-ref="getBookList" />
+	            <entry key="ADD_EDIT_BOOK" value-ref="addEditBook" />
+	            <entry key="WRONG_REQUEST" value-ref="wrongRequest" />
+	        </map>
+	    </constructor-arg>
+	</bean>
+    
+    
+    <!--commandProvider-->
+    
+    <bean id="commandProvider"
+          class="com.shatskiy.library.controller.command.CommandProvider">
+          <constructor-arg ref="map"></constructor-arg>       
+    </bean> 
+    
+    
+    
+    <bean id="controller"
+          class="com.shatskiy.library.controller.Controller">
+          <constructor-arg ref="commandProvider"></constructor-arg>       
+    </bean> 
+</beans>
